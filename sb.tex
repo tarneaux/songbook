@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage[chorded]{songs}
+\usepackage{musixtex,graphicx}
+\usepackage{tablature}
+
+\noversenumbers
+
+\renewcommand{\printchord}[1]{\bf#1}
+\renewcommand{\meterfont}[1]{\bf#1}
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\topskip}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{9.1in}
+\settowidth{\versenumwidth}{1.\ }
+\pagestyle{empty}
+
+\newindex{titleidx}{cbtitle}
+\newauthorindex{authidx}{cbauth}
+
+\smallmusicsize
+
+
+\begin{document}
+
+\showindex{Complete Index of Songs}{titleidx}
+
+\begin{songs}{}
+\beginsong{une minute}[by={Pomme},
+                       sr={Les Failles}]
+\capo{4}
+
+\gtab{F}{XX321X:XX321X} \
+\gtab{C/E}{XX201X:XX201X} \
+\gtab{Gsus4/D}{XX001X:XX001X} \
+\gtab{G/D}{XX000X:XX000X}
+
+\ifchorded
+Arpège joué tout au long de la chanson :
+
+\setlength\parindent{0pt}
+\begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \Notes\chord{F}\str33\en
+   \Notes\str51\en
+   \Notes\str42\en
+   \Notes\str33\en
+   \Notes\str51\en
+   \Notes\str42\en
+   \Notes\str33\en
+   \Notes\str51\en
+   \Notes\str42\en
+   \Notes\str33\en
+   \Notes\str51\en
+   \Notes\str40\en
+ \bar
+   \Notes\chord{C/E}\str32\en
+   \Notes\str51\en
+   \Notes\str40\en
+   \Notes\str32\en
+   \Notes\str51\en
+   \Notes\str40\en
+   \Notes\str32\en
+   \Notes\str51\en
+   \Notes\str40\en
+   \Notes\str32\en
+   \Notes\str51\en
+   \Notes\str40\en
+ \bar
+   \Notes\chord{Gsus4/D}\str30\en
+   \Notes\Str51\en
+   \Notes\Str40\en
+   \Notes\Str30\en
+   \Notes\Str51\en
+   \Notes\Str40\en
+   \Notes\Str30\en
+   \Notes\chord{G/D}\Str50\en
+   \Notes\Str40\en
+   \Notes\Str30\en
+   \Notes\Str50\en
+   \Notes\Str40\en
+   \Notes\Str30\en
+  \endpiece
+\end{music}
+\fi
+
+
+\ifchorded
+\beginverse*
+Intro: {\nolyrics | \[F]       | \[C/E]     | \[Gsus4/D] \[G/D] |} \rep{2}
+\endverse
+\fi
+
+\beginverse
+\memorize
+\[F]Viendras-tu te repo\[C/E]ser
+Sur mon \[Gsus4/D]épaule\[G/D]
+\[F]Malgré tout le mal que j'ai \[C/E]fait?
+Je te pro\[Gsus4/D]pose\[G/D]
+\endverse
+
+
+\beginchorus
+\memorize
+\[F]Une mi\[C/E]nute
+Enla\[Gsus4/D]cées \[G/D]
+\[F]Dans le \[C/E]noir
+Ou la lumière all\[Gsus4/D]umée\[G/D]
+Tu déc\[F]ideras-as-\[C/E]as \[Gsus4/D] \[G/D]
+\endchorus
+
+
+\beginverse
+^Voudras-tu me racon^ter
+Tes heures ^sombres^
+^Les âmes que tu as tou^ché
+La part de ton ^ombre^
+\endverse
+                 
+\beginverse
+^Je pourrais te racon^ter
+Mon Noël sans ^goût^
+^Et quand le vide m'appe^lait
+Le désir ^fou^
+\endverse
+
+\beginchorus
+^D'Une mi^nute
+Enla^cées^
+^Dans le ^noir
+Ou la lumière all^umée^
+Tu dé^cideras-as-^as
+Tu dé^cideras ^
+\endchorus
+
+\ifchorded
+\beginverse*
+Outro: {\nolyrics | \[F]       | \[C/E]     | \[Gsus4/D] \[G/D] |} \rep{2}
+\endverse
+\fi
+
+\endsong
+\end{songs}
+
+\end{document}
