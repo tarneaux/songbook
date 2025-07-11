@@ -22,9 +22,6 @@
 \newindex{titleidx}{cbtitle}
 \newauthorindex{authidx}{cbauth}
 
-\smallmusicsize
-
-
 \begin{document}
 
 \showindex{Complete Index of Songs}{titleidx}
@@ -42,13 +39,7 @@
 \ifchorded
 Arpège joué tout au long de la chanson :
 
-\setlength\parindent{0pt}
-\begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
+\begin{tablature}
    \Notes\chord{F}\str33\en
    \Notes\str51\en
    \Notes\str42\en
@@ -88,10 +79,8 @@ Arpège joué tout au long de la chanson :
    \Notes\Str50\en
    \Notes\Str40\en
    \Notes\Str30\en
-  \endpiece
-\end{music}
+\end{tablature}
 \fi
-
 
 \ifchorded
 \beginverse*
