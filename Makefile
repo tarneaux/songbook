@@ -1,4 +1,7 @@
 build:
+	rm sb.mx* || true
+	pdflatex sb.tex </dev/null
+	musixflx sb
 	pdflatex sb.tex </dev/null
 
 watch:
