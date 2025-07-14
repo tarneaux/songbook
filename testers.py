@@ -18,10 +18,11 @@ def get_line_type(line: str) -> LineType:
         return LineType.LT_NOTE
     words = line.split(" ")
     for w in words:
-        if w in ["", "N.C."] or re.match(r"x[0-9]*", w):
+        if w in ["", "N.C.", "-"] or re.match(r"x[0-9]*", w):
             continue
         while w.endswith('*'):
             w = w.removesuffix("*")
+        w = w.removeprefix("(").removesuffix(")")
         if w not in chords.chords_set:
             if w == "|":
                 return LineType.LT_SOLO

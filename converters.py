@@ -6,13 +6,14 @@ from enums import *
 
 def merge_lines(chordline: str, lyricline: str) -> str:
     chordline_chords = chords.get_words_n_positions(chordline)
-    chordline_chords.reverse() # To prevent adding all except 1st chord at the wrong position
     l = len(lyricline)
-    for c, i in chordline_chords:
-        if i < l:
-            lyricline = lyricline[:i] + f"\\[{c}]" + lyricline[i:]
-        else:
-            lyricline += f" \\[{c}]"
+    inner_chords = [ (c, i) for c, i in chordline_chords if i < l]
+    inner_positions = [ i for _, i in inner_chords ]
+    cut_lyricline = [ lyricline[a:b] for a, b in zip([0] + inner_positions, inner_positions + [l]) ]
+    lyricline = (cut_lyricline.pop(0) + "".join([
+        f"\\[{c}]" + (cut_lyricline.pop(0) if cut_lyricline else " ")
+        for c, _ in chordline_chords
+    ])).strip()
     return lyricline
 
 
@@ -35,7 +36,7 @@ def convert_solo_line(chordline: str) -> str:
 indications = (
     (CTX_VERSE, ("verse", "couplet", "pre-chorus", "pré-refrain", "bridge", "interlude")),
     (CTX_CHORUS,  ("chorus", "refrain")),
-    (CTX_SOLO, ("intro", "instrumental", "outro"))
+    (CTX_SOLO, ("intro", "instrumental", "outro", "solo", "lead"))
 )
 
 def convert_indication_line(indication_line: str) -> Context:
