@@ -64,12 +64,19 @@ def convert_chord_spec(line: str) -> Optional[str]:
 
 def transpose_staff(staff: list[str]) -> list[list[Optional[str]]]:
     firstcol = staff[0].find("| ")+2
-    lastcol = staff[0].find(" |", firstcol)-1
+    lastcol = len(staff[0]) - staff[0][::-1].find("| ") - 2
+    print(lastcol)
     # TODO: Repeaters
     conv = lambda c: c if c != "" else None
+    def findany(s, l, start):
+        return min([
+            item
+            for item in [s.find(item, start) for item in l]
+            if item != -1
+        ])
     transposed = [
         [
-            conv(string[col:string.find("-", col)]) if staff[i][col-1] == "-" else None
+            conv(string[col:findany(string, ["-", " "], col)]) if staff[i][col-1] in ["-", " "] else None
             for i, string in enumerate(staff)
         ]
         for col in range(firstcol, lastcol+1)
@@ -77,6 +84,7 @@ def transpose_staff(staff: list[str]) -> list[list[Optional[str]]]:
     return transposed
 
 def convert_staff(staff: list[str], above: Optional[str], below: Optional[str]) -> list[str]:
+    ab_offset = staff[0].find("| ")+2
     staff_t: list[list[Optional[str]]] = transpose_staff(staff)
     above = above or ""
     below = below or ""
@@ -90,16 +98,17 @@ def convert_staff(staff: list[str], above: Optional[str], below: Optional[str]) 
     return [
         convert_staff_column(
             column,
-            get_next(above_wp, i+2),
-            get_next(below_wp, i+2)
+            get_next(above_wp, i+ab_offset),
+            get_next(below_wp, i+ab_offset)
         )
         for i, column in enumerate(staff_t)
         if column != [None] * 6
     ]
 
 def convert_staff_column(col: list[Optional[str]], above: Optional[str], below: Optional[str]) -> str:
+    print(col)
     if col == ["|"]*6:
-        return "\bar"
+        return "\\bar"
     # if col == [None]*6:
         # return r" \notes\hsk\en"
         # return r"\hsk\zbar"
@@ -113,11 +122,16 @@ def convert_staff_column(col: list[Optional[str]], above: Optional[str], below: 
         + (r"\chord{" + above + "}" if above is not None else "")
         + (r"\textbelow{" + below + "}" if below is not None else "")
         + (
-            max([0] + [
+            # max([0] + [
+            #     len(col_string)
+            #     for col_string in col
+            #     if col_string is not None
+            # ])//1 * r"\hsk"
+            (max([0] + [
                 len(col_string)
                 for col_string in col
                 if col_string is not None
-            ])//1 * r"\hsk"
+            ])-1)//2 * r"\en\notes"
         )
         + r"\en"
         + r"\zbar"

@@ -68,8 +68,11 @@ def convert(text: str, title: str, artist: str):
             case LineType.LT_CHORD: pass
             case LineType.LT_EMPTY: pass
             case LineType.LT_LYRIC:
-                assert line_types[i-1] in {LineType.LT_CHORD, LineType.LT_EMPTY}
-                out_add(converters.merge_lines(tl[i-1], tl[i]))
+                # assert line_types[i-1] in {LineType.LT_CHORD, LineType.LT_EMPTY}
+                if line_types[i-1] == LineType.LT_CHORD:
+                    out_add(converters.merge_lines(tl[i-1], tl[i]))
+                else:
+                    out_add(tl[i])
             case LineType.LT_SOLO:
                 if context[-1] != CTX_SOLO:
                     print(f"WARNING: Automatically switching to solo context at line {i}")
