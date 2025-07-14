@@ -1,74 +1,9 @@
-import json,re,sys
-from dataclasses import dataclass
+import re,sys,os
 from typing import List, Optional
-from enum import Enum
 
-chords = json.load(open("chords.complete.json"))
-chords_set = set(chords.keys())
+import testers, converters, chords
 
-class LineType(Enum):
-    LT_SOLO = 1
-    LT_CHORD = 2
-    LT_LYRIC = 3
-    LT_CAPO = 4
-    LT_INDICATION = 5
-    LT_EMPTY = 6
-
-def get_line_type(line: str) -> LineType:
-    if parse_capo(line):
-        return LineType.LT_CAPO
-    if is_part_indication(line):
-        return LineType.LT_INDICATION
-
-    if line == "":
-        return LineType.LT_EMPTY
-    words = line.split(" ")
-    for w in words:
-        if w == "" or re.match(r"x[0-9]*", w):
-            continue
-        if w not in chords_set:
-            if w == "|":
-                return LineType.LT_SOLO
-            return LineType.LT_LYRIC
-    return LineType.LT_CHORD
-
-def get_chords_in_line(chordline: str) -> list:
-    return list(zip(
-        [
-            chord
-            for chord in chordline.split(" ")
-            if chord != ""
-        ],
-        [
-            i
-            for i in range(len(chordline))
-            if chordline[i] != " " and (" "+chordline)[i] == " "
-        ]
-    ))
-
-def merge_lines(chordline: str, lyricline: str) -> str:
-    chords = get_chords_in_line(chordline)
-    chords.reverse() # To prevent adding all except 1st chord at the wrong position
-    for c, i in chords:
-        if i < len(lyricline):
-            lyricline = lyricline[:i] + f"\\[{c}]" + lyricline[i:]
-        else:
-            lyricline += f"\\[{c}]"
-    return lyricline
-
-
-def make_solo_line(chordline: str) -> str:
-    chordline = chordline.strip()
-    def convert_word(w: str):
-        if w in chords_set: return f"\\[{w}]"
-        elif re.match(r"x[0-9]*", w): return f"\\rep{{{w[1:]}}}"
-        else: return w
-    chordline = " ".join([
-        convert_word(word)
-        for word in chordline.split(" ")
-    ])
-    return "{\\nolyrics " + chordline + "}"
-
+from enums import *
 
 def sanitize_ug(text: str):
     text = text.replace('\xa0', ' ').replace("\u2005", " ")
@@ -78,37 +13,19 @@ def sanitize_ug(text: str):
     ])
     return text
 
-def is_part_indication(line: str) -> bool:
-    return bool(re.fullmatch(r"\[.*\]", line.strip()))
-
 def get_song_start(title: str, artist: str) -> str:
     return r"\beginsong{" + title +"}[by={" + artist + "}]"
 
-def parse_capo(line: str) -> Optional[int]:
-    if re.fullmatch(r"Capo [0-9]*", line):
-        return int(line[5:])
+# print("\n\n\\zbar\n\n".join([
+#     convert_staff(transpose_staff(group))
+#     for group in groups
+# ]))
 
-@dataclass
-class Context:
-    begin: str
-    end: str
-
-CTX_VERSE = Context(r"\beginverse", r"\endverse")
-CTX_CHORUS = Context(r"\beginchorus", r"\endchorus")
-CTX_SOLO = Context(r"\ifchorded \beginverse*", r"\endverse \fi")
-
-def main():
-    if len(sys.argv) != 4:
-        print("needed args: <path> <name> <artist>")
-        exit(1)
-
-    tf = open(sys.argv[1], encoding="utf-8").read()
-    title = sys.argv[2]
-    artist = sys.argv[3]
+def convert(text: str, title: str, artist: str):
     CTX_SONG = Context(get_song_start(title, artist), r"\endsong")
-    tf = sanitize_ug(tf)
+    tf = sanitize_ug(text)
     tl = tf.splitlines()
-    line_types = [get_line_type(line) for line in tl]
+    line_types = [testers.get_line_type(line) for line in tl]
     out = []
     context: List[Context] = []
     def out_add(s: str):
@@ -128,39 +45,91 @@ def main():
             return True
         else:
             return False
-    def ensure_ctx(ctx: Context):
-        if len(context) == 2 and context[1] != ctx:
+    def ensure_ctx(ctx: Context, new: bool):
+        if len(context) == 2 and (new or context[1] != ctx):
             end_ctx()
         if len(context) != 2:
             start_ctx(ctx)
     start_ctx(CTX_SONG)
+    skip = 0
+    for i, t in enumerate(line_types):
+        if t == LineType.LT_CHORD and (
+            i == len(tl) - 1
+            or (line_types[i+1] not in (LineType.LT_LYRIC, LineType.LT_TAB))
+        ):
+            line_types[i] = LineType.LT_SOLO
     for i in range(len(tl)):
+        if skip:
+            skip -= 1
+            continue
         match line_types[i]:
             case LineType.LT_CAPO:
-                c = parse_capo(tl[i])
-                out_add(r"\capo{" + str(c) + r"}")
-            case LineType.LT_CHORD:
-                if i == len(tl) - 1 or line_types[i+1] != LineType.LT_LYRIC:
-                    out_add(make_solo_line(tl[i]))
+                out_add(converters.convert_capo(tl[i]))
+            case LineType.LT_CHORD: pass
             case LineType.LT_EMPTY: pass
             case LineType.LT_LYRIC:
-                out_add(merge_lines(tl[i-1], tl[i]))
+                assert line_types[i-1] in {LineType.LT_CHORD, LineType.LT_EMPTY}
+                out_add(converters.merge_lines(tl[i-1], tl[i]))
             case LineType.LT_SOLO:
-                out_add(make_solo_line(tl[i]))
-            case LineType.LT_INDICATION:
-                part_indication = tl[i].strip()[1:-1]
-                if part_indication.startswith("Verse") or part_indication.startswith("Couplet") or part_indication.startswith("Pre-chorus") or part_indication.startswith("Pré-refrain") or part_indication.startswith("Bridge"):
-                    ensure_ctx(CTX_VERSE)
-                elif part_indication.startswith("Chorus") or part_indication.startswith("Refrain"):
-                    ensure_ctx(CTX_CHORUS)
-                elif part_indication in ["Intro", "Instrumental", "Outro"]:
-                    ensure_ctx(CTX_SOLO)
-                    # out_add(r"\musicnote{" + part_indication + r"}")
-                else:
-                    raise Exception(f"Unknown part indication: {part_indication}")
+                if context[-1] != CTX_SOLO:
+                    print(f"WARNING: Automatically switching to solo context at line {i}")
+                    ensure_ctx(CTX_SOLO, False)
+                out_add(converters.convert_solo_line(tl[i]))
+            case LineType.LT_PART_INDICATION:
+                ctx = converters.convert_indication_line(tl[i])
+                ensure_ctx(ctx, new=True)
+            case LineType.LT_CHORD_SPEC:
+                cs = converters.convert_chord_spec(tl[i])
+                if cs is None:
+                    print(i)
+                    raise Exception("Not a chord spec line. This indicates a bug.")
+                out_add(cs)
+            case LineType.LT_NOTE:
+                out_add(r"\musicnote{" + tl[i][1:-1] + r"}")
+            case LineType.LT_TAB:
+                above = tl[i-1] if line_types[i-1] != LineType.LT_EMPTY else None
+                below = tl[i+6] if line_types[i+6] != LineType.LT_EMPTY else None
+                ensure_ctx(CTX_TABLATURE, new=False)
+                assert [t == LineType.LT_TAB for t in line_types[i:i+6]] == [True] * 6
+                for line in converters.convert_staff(tl[i:i+6], above, below):
+                    out_add(line)
+                skip = 5 if below is None else 6
     while end_ctx(): pass
     out_str = "\n".join(out)
-    open("scriptout.tex", "w").write(out_str)
+    return out_str
+
+def main():
+    if len(sys.argv) != 2:
+        print("needed arg: <filename>")
+        exit(1)
+    path = sys.argv[1]
+
+    if not path.startswith(os.path.expanduser("~/ug-tabs")):
+        print(f"{path} is not part of ~/ug-tabs.")
+        exit(1)
+    
+    stripped_path = path.removeprefix(os.path.expanduser("~/ug-tabs/"))
+    match = re.fullmatch(r"(.*)/(.*)_([^_]*)_[0-9]+.txt", stripped_path)
+    if match is None:
+        print("Invalid format, missing _[0-9]+.txt at the end")
+        exit(1)
+    artist = match.group(1)
+    title = match.group(2)
+
+    text = open(path, encoding="utf-8").read()
+
+    out_str = convert(text, title, artist.replace("_", " "))
+
+    os.makedirs(os.path.join("songs", artist), exist_ok=True)
+    out_path = os.path.join("songs", artist, f"{title}.tex")
+
+    if not os.path.exists(out_path):
+        open(os.path.join("songs", "index.tex"), "a").write(f"\\input{{{out_path}}}\n")
+    else:
+        # TODO: Better handle this
+        print(f"WARNING: \"{out_path}\" already exists, overwriting and not adding to index")
+
+    open(out_path, "w").write(out_str)
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,8 @@
 
 % custom clef
 \newcommand\TAB[1]{%
-  \setclefsymbol{#1}{\,\rotatebox{90}{TAB}}%
+  % \setclefsymbol{#1}{\,\rotatebox{90}{TAB}}%
+  \setclefsymbol{#1}{}%
   \setclef{#1}9}
 
 % internal string choosing command
@@ -20,14 +21,15 @@
   \or\def\@strnr{9}%
   \else\@strerror
   \fi
-  \zchar\@strnr{\footnotesize#2}}
+  \zchar\@strnr{\scriptsize\bf#2}}
 % \@strerror could be defined to issue some warning/error
 
 % User level commands
 \newcommand\STr[2]{\@str{#1}{#2}\sk}  % with a full note skip
 \newcommand\Str[2]{\@str{#1}{#2}\hsk} % with a half note skip
 \newcommand\str[2]{\@str{#1}{#2}}     % with no skip
-\newcommand\chord[1]{\zchar{13}{\printchord{#1}}}
+\newcommand\chord[1]{\zchar{12}{\printchord{#1}}}
+\newcommand\textbelow[1]{\zchar{-4}{#1}}
 \makeatother
 
 \setlength\parindent{0pt}
