@@ -4,3 +4,7 @@
 /sb.mx2
 /sb.pdf
 /sb.sxc
+/chords.complete.json
+/*.sbx
+/*.sxd
+__pycache__/
