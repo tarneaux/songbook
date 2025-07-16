@@ -36,7 +36,7 @@ def convert_solo_line(chordline: str) -> str:
 indications = (
     (CTX_VERSE, ("verse", "couplet", "pre-chorus", "pré-refrain", "bridge", "interlude")),
     (CTX_CHORUS,  ("chorus", "refrain")),
-    (CTX_SOLO, ("intro", "instrumental", "outro", "solo", "lead"))
+    (CTX_SOLO, ("intro", "instrumental", "outro", "solo", "lead", "guitar solo", "fill", "coda", "post-"))
 )
 
 def convert_indication_line(indication_line: str) -> Context:
