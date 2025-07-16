@@ -1,7 +1,7 @@
 import re,sys,os
-from typing import List, Optional
+from typing import List
 
-import testers, converters, chords
+import testers, converters
 
 from enums import *
 
@@ -15,11 +15,6 @@ def sanitize_ug(text: str):
 
 def get_song_start(title: str, artist: str) -> str:
     return r"\beginsong{" + title +"}[by={" + artist + "}]"
-
-# print("\n\n\\zbar\n\n".join([
-#     convert_staff(transpose_staff(group))
-#     for group in groups
-# ]))
 
 def convert(text: str, title: str, artist: str):
     CTX_SONG = Context(get_song_start(title, artist), r"\endsong")
