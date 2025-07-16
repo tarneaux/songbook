@@ -91,7 +91,7 @@ def convert(text: str, title: str, artist: str):
                 out_add(r"\musicnote{" + tl[i][1:-1] + r"}")
             case LineType.LT_TAB:
                 above = tl[i-1] if line_types[i-1] != LineType.LT_EMPTY else None
-                below = tl[i+6] if line_types[i+6] != LineType.LT_EMPTY else None
+                below = tl[i+6] if i+6<len(line_types) and line_types[i+6] != LineType.LT_EMPTY else None
                 ensure_ctx(CTX_TABLATURE, new=False)
                 assert [t == LineType.LT_TAB for t in line_types[i:i+6]] == [True] * 6
                 for line in converters.convert_staff(tl[i:i+6], above, below):
