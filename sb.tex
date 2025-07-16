@@ -4,10 +4,10 @@
 \usepackage{tablature}
 
 \noversenumbers
+\interlinepenalty = 0
 
 \renewcommand{\printchord}[1]{\bf#1}
 \renewcommand{\meterfont}[1]{\bf#1}
-\interlinepenalty = 0
 
 \setlength{\oddsidemargin}{0in}
 \setlength{\evensidemargin}{0in}
@@ -20,14 +20,19 @@
 \settowidth{\versenumwidth}{1.\ }
 \pagestyle{empty}
 
-\newindex{titleidx}{cbtitle}
-\newauthorindex{authidx}{cbauth}
+\newindex{titleidx}{titleidx}
+\newauthorindex{authoridx}{authoridx}
+
+\newcommand\repeatchorus{
+ (Chorus)
+}
 
 \begin{document}
 
-\showindex{Complete Index of Songs}{titleidx}
+\showindex[2]{Chansons par titre}{titleidx}
+\showindex[2]{Chansons par autrice}{authoridx}
 
-\begin{songs}{}
+\begin{songs}{titleidx,authoridx}
 \input{songs/index.tex}
 \end{songs}
 
