@@ -115,13 +115,13 @@ def convert_staff_column(col: list[Optional[str]], above: Optional[str], below: 
         # return r"\hsk\zbar"
     return (
         r" \notes"
+        + (r"\chord{" + above + "}" if above is not None else "")
+        + (r"\textbelow{" + below + "}" if below is not None else "")
         + "".join([
             r"\str{" + str(6-string) + r"}{" + col_string + r"}"
             for string, col_string in enumerate(col)
             if col_string is not None
         ])
-        + (r"\chord{" + above + "}" if above is not None else "")
-        + (r"\textbelow{" + below + "}" if below is not None else "")
         + (
             # max([0] + [
             #     len(col_string)
