@@ -4,7 +4,7 @@ from enums import LineType
 import converters, chords
 
 def get_line_type(line: str) -> LineType:
-    if line == "":
+    if line.strip() == "":
         return LineType.LT_EMPTY
     if converters.parse_capo(line):
         return LineType.LT_CAPO
@@ -18,14 +18,12 @@ def get_line_type(line: str) -> LineType:
         return LineType.LT_NOTE
     words = line.split(" ")
     for w in words:
-        if w in ["", "N.C.", "-"] or re.match(r"x[0-9]*", w):
+        if w in ["", "N.C.", "-", "|"] or re.match(r"x[0-9]*", w):
             continue
         while w.endswith('*'):
             w = w.removesuffix("*")
         w = w.removeprefix("(").removesuffix(")")
         if w not in chords.chords_set:
-            if w == "|":
-                return LineType.LT_SOLO
             return LineType.LT_LYRIC
     return LineType.LT_CHORD
 
@@ -36,4 +34,4 @@ def is_note(line: str) -> bool:
     return bool(re.fullmatch(r"\{.*\}", line.strip()))
 
 def is_tab_line(line: str) -> bool:
-    return bool(re.fullmatch(r"[eBGDAE]? \| ?[\-0-9\/hp( \| )]* \| [\space]*(x2)?", line))
+    return bool(re.fullmatch(r"[eBGDAE]? \| ?[\-0-9\/hp( \| )\(\)\^\>]* \| [\space]*(\(?x[0-9]*\)?)?", line))
