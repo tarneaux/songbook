@@ -34,7 +34,7 @@ def convert_solo_line(chordline: str) -> str:
 
 
 indications = (
-    (CTX_VERSE, ("verse", "couplet", "pre-chorus", "pré-refrain", "bridge", "interlude")),
+    (CTX_VERSE, ("verse", "couplet", "pre-chorus", "pré-refrain", "bridge", "interlude", "hook")),
     (CTX_CHORUS,  ("chorus", "refrain")),
     (CTX_SOLO, ("intro", "instrumental", "outro", "solo", "lead", "guitar solo", "fill", "coda", "post-", "pont"))
 )
@@ -90,7 +90,10 @@ def convert_staff(staff: list[str], above: Optional[str], below: Optional[str]) 
     above = above or ""
     below = below or ""
     above_wp = chords.get_words_n_positions(above)
-    below_wp = chords.get_words_n_positions(below)
+    if below.startswith('"') and below.endswith('"'):
+        below_wp = [(below.strip('"'), 0)]
+    else:
+        below_wp = chords.get_words_n_positions(below)
     def get_next(abwp, col) -> Optional[str]:
         try:
             if abwp[0][1] < col:
@@ -104,7 +107,7 @@ def convert_staff(staff: list[str], above: Optional[str], below: Optional[str]) 
         )
         for i, column in enumerate(staff_t)
         if column != [None] * 6
-    ]
+    ] + [ "" ]
 
 def convert_staff_column(col: list[Optional[str]], above: Optional[str], below: Optional[str]) -> str:
     print(col)
@@ -113,6 +116,7 @@ def convert_staff_column(col: list[Optional[str]], above: Optional[str], below: 
     # if col == [None]*6:
         # return r" \notes\hsk\en"
         # return r"\hsk\zbar"
+    col = [el.replace("\\", "\\textbackslash") if el is not None else None for el in col]
     return (
         r" \notes"
         + (r"\chord{" + above + "}" if above is not None else "")

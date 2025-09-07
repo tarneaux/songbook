@@ -40,10 +40,10 @@ def convert(text: str, title: str, artist: str):
             return True
         else:
             return False
-    def ensure_ctx(ctx: Context, new: bool):
+    def ensure_ctx(ctx: Context|None, new: bool):
         if len(context) == 2 and (new or context[1] != ctx):
             end_ctx()
-        if len(context) != 2:
+        if ctx is not None and len(context) != 2:
             start_ctx(ctx)
     start_ctx(CTX_SONG)
     skip = 0
@@ -64,6 +64,8 @@ def convert(text: str, title: str, artist: str):
             case LineType.LT_EMPTY: pass
             case LineType.LT_LYRIC:
                 # assert line_types[i-1] in {LineType.LT_CHORD, LineType.LT_EMPTY}
+                if i + 1 < len(line_types) and line_types[i+1] == LineType.LT_TAB:
+                    continue
                 if line_types[i-1] == LineType.LT_CHORD:
                     out_add(converters.merge_lines(tl[i-1], tl[i]))
                 else:
@@ -83,11 +85,13 @@ def convert(text: str, title: str, artist: str):
                     raise Exception("Not a chord spec line. This indicates a bug.")
                 out_add(cs)
             case LineType.LT_NOTE:
+                ensure_ctx(None, new=False)
                 out_add(r"\musicnote{" + tl[i][1:-1] + r"}")
             case LineType.LT_TAB:
                 above = tl[i-1] if line_types[i-1] != LineType.LT_EMPTY else None
                 below = tl[i+6] if i+6<len(line_types) and line_types[i+6] != LineType.LT_EMPTY else None
-                ensure_ctx(CTX_TABLATURE, new=False)
+                ensure_ctx(CTX_TABLATURE, new=True)
+                print(i)
                 assert [t == LineType.LT_TAB for t in line_types[i:i+6]] == [True] * 6
                 for line in converters.convert_staff(tl[i:i+6], above, below):
                     out_add(line)

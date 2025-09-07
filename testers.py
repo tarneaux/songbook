@@ -34,4 +34,4 @@ def is_note(line: str) -> bool:
     return bool(re.fullmatch(r"\{.*\}", line.strip()))
 
 def is_tab_line(line: str) -> bool:
-    return bool(re.fullmatch(r"[eBGDAE]? \| ?[\-0-9\/hp( \| )\(\)\^\>]* \| [\space]*(\(?x[0-9]*\)?)?", line))
+    return bool(re.fullmatch(r"[eBGDAE]? \| ?[\-0-9\/hpxb\\( \| )\(\)\^\>]* \| [\space]*(\(?x[0-9]*\)?)?", line))
