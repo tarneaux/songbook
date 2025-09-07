@@ -9,3 +9,5 @@ Requirements:
 ```
 
 Chords from: <https://github.com/T-vK/chord-collection>
+
+Tab download is done with [ugd](https://git.sr.ht/~tarneo/ugd).
