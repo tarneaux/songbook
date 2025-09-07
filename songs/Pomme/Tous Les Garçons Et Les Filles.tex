@@ -1,9 +1,7 @@
 
 \beginsong{Tous Les Garçons Et Les Filles}[by={Pomme}]
 
- \beginverse
- \endverse
-
+ \baselineadj=0pt plus 10pt minus 10pt
 
  \ifchorded
  \begin{music}
@@ -12,7 +10,7 @@
  \TAB1
  \setlines1{6}
  \startpiece
-   \notes\str{2}{3}\en\zbar
+   \notes\textbelow{Tous les garçons et les filles de mon âge}\str{2}{3}\en\zbar
    \notes\chord{C}\str{4}{0}\en\zbar
    \notes\str{6}{0}\str{5}{1}\en\zbar
    \notes\str{3}{2}\en\zbar
@@ -27,10 +25,6 @@
  \endpiece
  \end{music} \fi
 
- \beginverse
-   Tous les garçons et les filles de mon âge
- \endverse
-
 
  \ifchorded
  \begin{music}
@@ -39,7 +33,7 @@
  \TAB1
  \setlines1{6}
  \startpiece
-   \notes\str{3}{0}\en\zbar
+   \notes\textbelow{Se promènent dans la rue deux par deux}\str{3}{0}\en\zbar
    \notes\chord{Dm}\str{4}{2}\en\zbar
    \notes\str{6}{1}\str{5}{3}\en\zbar
    \notes\str{3}{0}\en\zbar
@@ -53,11 +47,7 @@
    \notes\str{6}{3}\str{5}{0}\en\zbar
  \endpiece
  \end{music} \fi
-
- \beginverse
-   Se promènent dans la rue deux par deux
-  \musicnote{Même chose pour les autres phrases des couplets,sauf la dernière qui devient :}
- \endverse
+ \musicnote{Même chose pour les autres phrases des couplets,sauf la dernière qui devient :}
 
 
  \ifchorded
@@ -67,7 +57,7 @@
  \TAB1
  \setlines1{6}
  \startpiece
-   \notes\str{2}{3}\en\zbar
+   \notes\textbelow{Oui mais moi,        je vais seule, }\str{2}{3}\en\zbar
    \notes\chord{C}\str{4}{0}\en\zbar
    \notes\str{6}{0}\str{5}{1}\en\zbar
    \notes\str{3}{2}\en\zbar
@@ -82,9 +72,47 @@
  \endpiece
  \end{music} \fi
 
- \beginverse
-      Oui mais moi,      je vais seule, 
- \endverse
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\chord{Dm}\textbelow{car}\str{3}{0}\en\zbar
+   \notes\textbelow{person-ne}\str{4}{2}\en\zbar
+   \notes\str{6}{1}\str{5}{3}\en\zbar
+   \notes\str{1}{3}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+   \notes\textbelow{ne}\str{2}{3}\en\zbar
+   \notes\chord{C}\textbelow{m'aime}\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+ \endpiece
+ \end{music} \fi
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\chord{F7M/C}\textbelow{Mes}\str{2}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\chord{F7M/C}\textbelow{jours}\str{3}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\chord{F7M/C}\textbelow{comme}\str{2}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\textbelow{mes}\str{3}{3}\en\zbar
+   \notes\chord{F7M/C}\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+ \endpiece
+ \end{music} \fi
 
 
  \ifchorded
@@ -94,241 +122,206 @@
  \TAB1
  \setlines1{6}
  \startpiece
-   \notes\chord{Dm}\str{3}{0}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
-   \notes\str{1}{3}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
+   \notes\textbelow{nuits}\str{2}{3}\en\zbar
+   \notes\chord{C}\str{4}{0}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\str{3}{2}\en\zbar
+   \notes\chord{C}\str{4}{0}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
    \notes\str{2}{3}\en\zbar
-   \notes\chord{C}\str{4}{2}\en\zbar
+   \notes\str{4}{0}\en\zbar
+   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
+   \notes\str{3}{2}\en\zbar
+   \notes\str{4}{0}\en\zbar
+   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
+ \endpiece
+ \end{music} \fi
+
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\chord{F7M/C}\textbelow{sont}\str{2}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\textbelow{en}\str{6}{0}\str{5}{1}\en\zbar
+   \notes\chord{F7M/C}\textbelow{tous}\str{3}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\chord{F7M/C}\textbelow{points}\str{2}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\str{3}{3}\en\zbar
+   \notes\chord{F7M/C}\textbelow{pa-}\str{4}{2}\en\zbar
    \notes\str{6}{0}\str{5}{1}\en\zbar
  \endpiece
  \end{music} \fi
 
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\textbelow{-reils}\str{1}{3}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+   \notes\str{2}{2}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+   \notes\str{1}{3}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+   \notes\str{2}{2}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+ \endpiece
+ \end{music} \fi
+
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\chord{F7M/C}\textbelow{Sans}\str{2}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\chord{F7M/C}\textbelow{joies}\str{3}{3}\en\zbar
+   \notes\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\chord{F7M/C}\textbelow{et}\str{2}{3}\en\zbar
+   \notes\textbelow{pleins}\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\textbelow{d'en-}\str{3}{3}\en\zbar
+   \notes\chord{F7M/C}\str{4}{2}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+ \endpiece
+ \end{music} \fi
+
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\textbelow{-nui}\str{2}{3}\en\zbar
+   \notes\chord{C}\str{4}{0}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\str{3}{2}\en\zbar
+   \notes\chord{C}\str{4}{0}\en\zbar
+   \notes\str{6}{0}\str{5}{1}\en\zbar
+   \notes\str{2}{3}\en\zbar
+   \notes\str{4}{0}\en\zbar
+   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
+   \notes\str{3}{2}\en\zbar
+   \notes\str{4}{0}\en\zbar
+   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
+ \endpiece
+ \end{music} \fi
+
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\textbelow{personne}\str{3}{0}\en\zbar
+   \notes\chord{Dm}\str{4}{2}\en\zbar
+   \notes\str{6}{1}\str{5}{3}\en\zbar
+   \notes\str{2}{0}\en\zbar
+   \notes\chord{Dm}\textbelow{ne}\str{4}{2}\en\zbar
+   \notes\str{6}{1}\str{5}{3}\en\zbar
+   \notes\textbelow{murmure}\str{3}{0}\en\zbar
+   \notes\chord{Dm}\str{4}{2}\en\zbar
+   \notes\textbelow{"je}\str{6}{1}\str{5}{3}\en\zbar
+   \notes\str{2}{0}\en\zbar
+   \notes\chord{Dm}\textbelow{t'aime"}\str{4}{2}\en\zbar
+   \notes\str{6}{1}\str{5}{3}\en\zbar
+ \endpiece
+ \end{music} \fi
+
+
+ \ifchorded
+ \begin{music}
+ \instrumentnumber{1}
+ \nobarnumbers
+ \TAB1
+ \setlines1{6}
+ \startpiece
+   \notes\textbelow{à}\str{3}{0}\en\zbar
+   \notes\chord{Dm}\textbelow{mon}\str{4}{2}\en\zbar
+   \notes\str{6}{1}\str{5}{3}\en\zbar
+   \notes\textbelow{oreil}\str{2}{0}\en\zbar
+   \notes\chord{Dm}\str{4}{2}\en\zbar
+   \notes\textbelow{-le...}\str{6}{1}\str{5}{3}\en\zbar
+   \notes\str{1}{3}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+   \notes\str{2}{2}\en\zbar
+   \notes\chord{G}\str{4}{0}\en\zbar
+   \notes\str{6}{3}\str{5}{0}\en\zbar
+ \endpiece
+ \end{music} \fi
+
  \beginverse
-      car person---ne  ne m'aime
+  Tous les garçons et les filles de mon âge
+  Se promènent dans la rue deux par deux
+  Tous les garçons et les filles de mon âge
+  Savent bien ce que c'est d'être heureux
  \endverse
 
  \beginchorus
-      F7M/C    F7M/C    F7M/C    F7M/C         
+  Et les yeux dans les yeux et la main dans la main
+  Ils s'en vont amoureux, sans peur du lendemain
+  Oui, mais moi, je vais seule par les rues, l'âme en peine
+  Oui, mais moi, je vais seule car personne ne m'aime
+  Mes jours comme mes nuits
+  Sont en tous points pareils
+  Sans joies et pleins d'ennuis
+  Personne ne murmure "je t'aime" à mon oreille
  \endchorus
 
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\chord{F7M/C}\str{2}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\chord{F7M/C}\str{3}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\chord{F7M/C}\str{2}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{3}\en\zbar
-   \notes\chord{F7M/C}\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
- \endpiece
- \end{music} \fi
-
  \beginverse
-        Mes    jours    comme    mes 
+  Tous les garçons et les filles de mon âge
+  Font ensemble des projets d'avenir
+  Tous les garçons et les filles de mon âge
+  Savent très bien ce qu'aimer veut dire
  \endverse
 
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\str{2}{3}\en\zbar
-   \notes\chord{C}\str{4}{0}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{2}\en\zbar
-   \notes\chord{C}\str{4}{0}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{2}{3}\en\zbar
-   \notes\str{4}{0}\en\zbar
-   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{2}\en\zbar
-   \notes\str{4}{0}\en\zbar
-   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
- \endpiece
- \end{music} \fi
+ \beginchorus
+  Et les yeux dans les yeux et la main dans la main
+  Ils s'en vont amoureux, sans peur du lendemain
+  Oui, mais moi, je vais seule par les rues, l'âme en peine
+  Oui, mais moi, je vais seule car personne ne m'aime
+  Mes jours comme mes nuits
+  Sont en tous points pareils
+  Sans joies et pleins d'ennuis
+  Oh quand, donc, pour moi brillera le soleil ?
+ \endchorus
 
  \beginverse
-     nuits  
-      F7M/C    F7M/C    F7M/C    F7M/C    
+  Comme les garçons et les filles de mon âge
+  Connaîtrais-je bientôt ce qu'est l'amour ?
+  Comme les garçons et les filles de mon âge
+  Je me demande quand viendra le jour
  \endverse
 
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\chord{F7M/C}\str{2}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\chord{F7M/C}\str{3}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\chord{F7M/C}\str{2}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{3}\en\zbar
-   \notes\chord{F7M/C}\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
- \endpiece
- \end{music} \fi
-
  \beginverse
-     sont   en tous    points    pa-
- \endverse
-
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\str{1}{3}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
-   \notes\str{2}{2}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
-   \notes\str{1}{3}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
-   \notes\str{2}{2}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
- \endpiece
- \end{music} \fi
-
- \beginverse
-      -reils
-      F7M/C    F7M/C    F7M/C    F7M/C    
- \endverse
-
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\chord{F7M/C}\str{2}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\chord{F7M/C}\str{3}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\chord{F7M/C}\str{2}{3}\en\zbar
-   \notes\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{3}\en\zbar
-   \notes\chord{F7M/C}\str{4}{2}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
- \endpiece
- \end{music} \fi
-
- \beginverse
-       Sans   joies   et pleins d'en-
- \endverse
-
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\str{2}{3}\en\zbar
-   \notes\chord{C}\str{4}{0}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{2}\en\zbar
-   \notes\chord{C}\str{4}{0}\en\zbar
-   \notes\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{2}{3}\en\zbar
-   \notes\str{4}{0}\en\zbar
-   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
-   \notes\str{3}{2}\en\zbar
-   \notes\str{4}{0}\en\zbar
-   \notes\chord{C}\str{6}{0}\str{5}{1}\en\zbar
- \endpiece
- \end{music} \fi
-
- \beginverse
-      -nui  
- \endverse
-
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\str{3}{0}\en\zbar
-   \notes\chord{Dm}\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
-   \notes\str{2}{0}\en\zbar
-   \notes\chord{Dm}\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
-   \notes\str{3}{0}\en\zbar
-   \notes\chord{Dm}\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
-   \notes\str{2}{0}\en\zbar
-   \notes\chord{Dm}\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
- \endpiece
- \end{music} \fi
-
- \beginverse
-     personne   ne    murmure "je t'aime"
- \endverse
-
-
- \ifchorded
- \begin{music}
- \instrumentnumber{1}
- \nobarnumbers
- \TAB1
- \setlines1{6}
- \startpiece
-   \notes\str{3}{0}\en\zbar
-   \notes\chord{Dm}\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
-   \notes\str{2}{0}\en\zbar
-   \notes\chord{Dm}\str{4}{2}\en\zbar
-   \notes\str{6}{1}\str{5}{3}\en\zbar
-   \notes\str{1}{3}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
-   \notes\str{2}{2}\en\zbar
-   \notes\chord{G}\str{4}{0}\en\zbar
-   \notes\str{6}{3}\str{5}{0}\en\zbar
- \endpiece
- \end{music} \fi
-
- \beginverse
-       à mon   oreil   -le...
+  Où les yeux dans ses yeux et la main dans sa main
+  j'aurai le coeur heureux sans peur du lendemain
+  le jour où, je n'aurai plus du tout, l'âme en peine
+  le jour où, moi aussi, j'aurai quelqu'un qui m'aime
  \endverse
 \endsong
